@@ -68,7 +68,8 @@ def printinfo(DetailsPrinted):
         EmpDetail = EmpFile.readline()
         if EmpDetail == "":
             break
-            line.rstrip()
+        else:
+            EmpDetail.rstrip()
             EmpList = EmpDetail.split("|")  
             fromdate = EmpList[0]
             if (str(rundate).upper() != "ALL"):
