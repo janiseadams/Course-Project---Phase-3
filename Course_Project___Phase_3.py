@@ -52,7 +52,7 @@ def printinfo(DetailsPrinted):
     TotTax = 0.00
     TotNetPay = 0.00
     
-    Empfile = open("Employees.txt", "r")
+    EmpFile = open("Employees.txt", "r")
     while True:
         rundate = input ("Enter start date for report (MM/DD/YYYY) or All for all data in file: ")
         if (rundate.upper() == "ALL"):
@@ -103,23 +103,23 @@ def printinfo(DetailsPrinted):
             EmpTotals["TotNetPay"] = TotNetPay
             DetailsPrinted = True   
         if (DetailsPrinted):
-            PrintTotals (EmpTotals)
+            PrintTotals(EmpTotals)
         else:
             print("No detail information to print")
 
-    def PrintTotals(EmpTotals):    
-        print()
-        print(f'Total Number Of Employees: {EmpTotals["TotEmp"]}')
-        print(f'Total Hours Worked: {EmpTotals["TotHrs"]:,.2f}')
-        print(f'Total Gross Pay: {EmpTotals["TotGrossPay"]:,.2f}')
-        print(f'Total Income Tax:  {EmpTotals["TotTax"]:,.2f}')
-        print(f'Total Net Pay: {EmpTotals["TotNetPay"]:,.2f}')
+def PrintTotals(EmpTotals):    
+    print()
+    print(f'Total Number Of Employees: {EmpTotals["TotEmp"]}')
+    print(f'Total Hours Worked: {EmpTotals["TotHrs"]:,.2f}')
+    print(f'Total Gross Pay: {EmpTotals["TotGrossPay"]:,.2f}')
+    print(f'Total Income Tax:  {EmpTotals["TotTax"]:,.2f}')
+    print(f'Total Net Pay: {EmpTotals["TotNetPay"]:,.2f}')
     
 if __name__ == "__main__":
     EmpFile = open("Employees.txt", "a")
     #EmpDetailList = []
     EmpTotals = {}
-    DetailsPrinted = False
+    DetailsPrinted = True
     while True:
         empname = GetEmpName()
         if (empname.upper() == "END"):
@@ -130,7 +130,7 @@ if __name__ == "__main__":
         taxrate = GetTaxRate()
         fromdate = fromdate.strftime('%Y-%m-%d')
         todate = todate.strftime('%Y-%m-%d')
-    EmpDetail = fromdate + "|" + todate + "|" + empname + "|" + hours + "|" + hourlyrate + "|" + taxrate + "\r"
-    EmpFile.write(EmpDetail)        
-    EmpFile.close()
-    printinfo(DetailsPrinted)
+        EmpDetail = fromdate + "|" + todate + "|" + empname + "|" + str(hours) + "|" + str(hourlyrate) + "|" + str(taxrate) + "\r"
+        EmpFile.write(EmpDetail)        
+EmpFile.close()       
+printinfo(DetailsPrinted)
