@@ -70,10 +70,8 @@ def printinfo(DetailsPrinted):
         EmpDetail = EmpFile.readline()
         if EmpDetail == " ":
             break
-            # write the line of code that will remove the carriage return from EmpDetail
             line.rstrip()
-            # write the ine of code that will split EmpDetail on the pipe delimiter and assign to the list EmpList
-        EmpList = EmpDetail.split("|")  
+            EmpList = EmpDetail.split("|")  
             fromdate = EmpList[0]
             if (str(rundate).upper() != "ALL"):
                 checkdate = datetime.strptime(fromdate, "%Y-%m-%d")
@@ -137,5 +135,4 @@ def printinfo(DetailsPrinted):
         EmpDetail = fromdate + "|" + todate + "|" + empname + "|" + hours + "|" + hourlyrate + "|" + taxrate + "\r"
         EmpFile.write(EmpDetail)        
         EmpFile.close()
-        EmpFile.close()        
     printinfo(DetailsPrinted)
