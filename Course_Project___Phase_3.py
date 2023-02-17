@@ -14,9 +14,8 @@ def GetDatesWorked():
         except ValueError:
             print("Invalid date format. Try again.")
             print()
-            continue  # skip next if statement and re-start loop
+            continue
         break
-
     while True:
         date_str = input("Enter to date (YYYY-MM-DD): ")
         try:
@@ -32,7 +31,7 @@ def GetDatesWorked():
     return fromdate, todate
 
 def GetHoursWorked():
-    hours = float(input('Enter amount of hours worked:  '))
+    hours = float(input("Enter amount of hours worked:  "))
     return hours
 def GetHourlyRate():
     hourlyrate = float(input ("Enter hourly rate: "))
@@ -53,7 +52,6 @@ def printinfo(DetailsPrinted):
     TotTax = 0.00
     TotNetPay = 0.00
     
-    # write the line of code that will open the file in read mode and assign it to EmpFile (Hint: see week 6, lab 2 as a guide)
     Empfile = open("Employees.txt", "r")
     while True:
         rundate = input ("Enter start date for report (MM/DD/YYYY) or All for all data in file: ")
@@ -68,7 +66,7 @@ def printinfo(DetailsPrinted):
             continue
     while True:
         EmpDetail = EmpFile.readline()
-        if EmpDetail == " ":
+        if EmpDetail == "":
             break
             line.rstrip()
             EmpList = EmpDetail.split("|")  
@@ -104,7 +102,7 @@ def printinfo(DetailsPrinted):
             EmpTotals["TotTax"] = TotTax
             EmpTotals["TotNetPay"] = TotNetPay
             DetailsPrinted = True   
-        if (DetailsPrinted):  #skip of no detail lines printed
+        if (DetailsPrinted):
             PrintTotals (EmpTotals)
         else:
             print("No detail information to print")
@@ -117,22 +115,22 @@ def printinfo(DetailsPrinted):
         print(f'Total Income Tax:  {EmpTotals["TotTax"]:,.2f}')
         print(f'Total Net Pay: {EmpTotals["TotNetPay"]:,.2f}')
     
-    if __name__ == "__main__":
-        EmpFile = open("Employees.txt", "a")
-            #EmpDetailList = []
-        EmpTotals = {}
-        DetailsPrinted = False
-        while True:
-                empname = GetEmpName()
-                if (empname.upper() == "END"):
-                    break
-                fromdate, todate = GetDatesWorked()
-                hours = GetHoursWorked()
-                hourlyrate = GetHourlyRate()
-                taxrate = GetTaxRate()
-                fromdate = fromdate.strftime('%Y-%m-%d')
-                todate = todate.strftime('%Y-%m-%d')
-        EmpDetail = fromdate + "|" + todate + "|" + empname + "|" + hours + "|" + hourlyrate + "|" + taxrate + "\r"
-        EmpFile.write(EmpDetail)        
-        EmpFile.close()
+if __name__ == "__main__":
+    EmpFile = open("Employees.txt", "a")
+    #EmpDetailList = []
+    EmpTotals = {}
+    DetailsPrinted = False
+    while True:
+        empname = GetEmpName()
+        if (empname.upper() == "END"):
+            break
+        fromdate, todate = GetDatesWorked()
+        hours = GetHoursWorked()
+        hourlyrate = GetHourlyRate()
+        taxrate = GetTaxRate()
+        fromdate = fromdate.strftime('%Y-%m-%d')
+        todate = todate.strftime('%Y-%m-%d')
+    EmpDetail = fromdate + "|" + todate + "|" + empname + "|" + hours + "|" + hourlyrate + "|" + taxrate + "\r"
+    EmpFile.write(EmpDetail)        
+    EmpFile.close()
     printinfo(DetailsPrinted)
